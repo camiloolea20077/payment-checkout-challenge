@@ -1,0 +1,42 @@
+# Dependencies
+node_modules/
+frontend/node_modules/
+backend/node_modules/
+
+# Build
+frontend/dist/
+backend/dist/
+coverage/
+frontend/coverage/
+backend/coverage/
+package-lock.json
+# Environment
+.env
+.env.*
+!.env.example
+frontend/.env
+backend/.env
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+
+# Operating system
+.DS_Store
+Thumbs.db
+
+# Prisma
+backend/prisma/*.db
+backend/prisma/*.db-journal
+
+# Testing
+.nyc_output/
+
+# Temporary files
+tmp/
+temp/

@@ -2,6 +2,7 @@ import { Inject, Injectable } from '@nestjs/common';
 import { Transaction } from '../../domain/entities/transaction';
 import { CustomerNotFoundError } from '../../domain/errors/customer-not-found.error';
 import { DomainError } from '../../domain/errors/domain-error';
+import { InsufficientStockError } from '../../domain/errors/insufficient-stock.error';
 import { PaymentGatewayError } from '../../domain/errors/payment-gateway.error';
 import { TransactionNotFoundError } from '../../domain/errors/transaction-not-found.error';
 import {
@@ -12,6 +13,7 @@ import {
   CardPaymentData,
   PAYMENT_GATEWAY,
   type PaymentGatewayPort,
+  type PaymentResult,
 } from '../../domain/ports/outbound/payment-gateway.port';
 import {
   TRANSACTION_REPOSITORY,
@@ -20,6 +22,7 @@ import {
 import { Result, err, ok } from '../../shared/types/result';
 import { TransactionView } from '../dto/transaction-view';
 import { TransactionViewMapper } from '../mappers/transaction-view.mapper';
+import { ConfirmSaleService } from '../services/confirm-sale.service';
 
 /**
  * Datos de entrada para procesar el pago de una transacción.
@@ -38,8 +41,9 @@ export interface ProcessPaymentInput {
  *   resultado, lo devuelve sin volver a cobrar → evita doble cobro).
  * - Un fallo técnico de la pasarela deja la transacción en `ERROR`, nunca la
  *   aprueba.
- * - No descuenta stock (eso ocurre de forma transaccional al aprobarse, en la
- *   fase de inventario).
+ * - Si se aprueba, delega en {@link ConfirmSaleService} el descuento de stock,
+ *   el movimiento de inventario y la asignación de la entrega, todo dentro de
+ *   una única transacción de base de datos.
  */
 @Injectable()
 export class ProcessPaymentUseCase {
@@ -50,6 +54,7 @@ export class ProcessPaymentUseCase {
     private readonly customerRepository: CustomerRepositoryPort,
     @Inject(PAYMENT_GATEWAY)
     private readonly paymentGateway: PaymentGatewayPort,
+    private readonly confirmSale: ConfirmSaleService,
   ) {}
 
   /**
@@ -78,57 +83,93 @@ export class ProcessPaymentUseCase {
       return err(new CustomerNotFoundError(transaction.customerId));
     }
 
-    const updated = await this.chargeAndResolve(
+    const resolved = await this.resolvePayment(
       transaction,
       customer.email,
       input.card,
     );
-    const persisted = await this.transactionRepository.update(updated);
-    return ok(TransactionViewMapper.toView(persisted));
+    return ok(TransactionViewMapper.toView(resolved));
   }
 
   /**
-   * Cobra en la pasarela y aplica la transición de estado correspondiente.
-   * Aísla el manejo de fallos técnicos para garantizar que nunca aprueban.
+   * Cobra en la pasarela y persiste el desenlace, garantizando que un fallo
+   * técnico nunca aprueba y que la aprobación es atómica con el inventario.
    */
-  private async chargeAndResolve(
+  private async resolvePayment(
     transaction: Transaction,
     customerEmail: string,
     card: CardPaymentData,
   ): Promise<Transaction> {
+    let result: PaymentResult;
     try {
-      const result = await this.paymentGateway.charge({
+      result = await this.paymentGateway.charge({
         reference: transaction.reference,
         amountInCents: transaction.totalAmount.amountInCents,
         currency: transaction.currency,
         customerEmail,
         card,
       });
-
-      switch (result.status) {
-        case 'APPROVED':
-          return transaction.approve(
-            result.providerTransactionId,
-            result.providerStatus,
-          );
-        case 'DECLINED':
-          return transaction.decline(
-            result.providerStatus,
-            result.failureReason ?? 'Pago rechazado por la pasarela.',
-          );
-        case 'VOIDED':
-        case 'ERROR':
-          return transaction.markError(
-            result.failureReason ?? 'La pasarela reportó un error.',
-            result.providerStatus,
-          );
-        default:
-          // PENDING: sin resultado terminal; se conserva el estado actual.
-          return transaction;
-      }
     } catch (error) {
       if (error instanceof PaymentGatewayError) {
-        return transaction.markError(error.message);
+        return this.transactionRepository.update(
+          transaction.markError(error.message),
+        );
+      }
+      throw error;
+    }
+
+    switch (result.status) {
+      case 'APPROVED':
+        return this.confirmApproved(
+          transaction,
+          result.providerTransactionId,
+          result.providerStatus,
+        );
+      case 'DECLINED':
+        return this.transactionRepository.update(
+          transaction.decline(
+            result.providerStatus,
+            result.failureReason ?? 'Pago rechazado por la pasarela.',
+          ),
+        );
+      case 'VOIDED':
+      case 'ERROR':
+        return this.transactionRepository.update(
+          transaction.markError(
+            result.failureReason ?? 'La pasarela reportó un error.',
+            result.providerStatus,
+          ),
+        );
+      default:
+        // PENDING: sin resultado terminal; se conserva el estado actual.
+        return transaction;
+    }
+  }
+
+  /**
+   * Confirma la venta de forma atómica. Si al aprobar ya no hay stock, marca la
+   * transacción como `ERROR` y no toca el inventario (la transacción de base de
+   * datos se revierte).
+   */
+  private async confirmApproved(
+    transaction: Transaction,
+    providerTransactionId: string,
+    providerStatus: string,
+  ): Promise<Transaction> {
+    try {
+      return await this.confirmSale.confirm(
+        transaction,
+        providerTransactionId,
+        providerStatus,
+      );
+    } catch (error) {
+      if (error instanceof InsufficientStockError) {
+        return this.transactionRepository.update(
+          transaction.markError(
+            'Stock agotado tras la aprobación del pago.',
+            providerStatus,
+          ),
+        );
       }
       throw error;
     }

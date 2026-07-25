@@ -74,13 +74,18 @@ describe('Checkout (e2e)', () => {
     await app.close();
   });
 
-  it('POST /checkout aprobado -> 201 APPROVED con total recalculado', async () => {
+  it('POST /checkout aprobado -> 201 APPROVED, total recalculado y stock descontado', async () => {
     gatewayResult = {
       providerTransactionId: 'wompi-approved',
       status: 'APPROVED',
       providerStatus: 'APPROVED',
       failureReason: null,
     };
+
+    const before = await request(http)
+      .get(`/api/v1/products/${SEEDED_PRODUCT_ID}/stock`)
+      .expect(200);
+    const stockBefore = before.body.availableUnits as number;
 
     const res = await request(http)
       .post('/api/v1/checkout')
@@ -100,6 +105,12 @@ describe('Checkout (e2e)', () => {
       .get(`/api/v1/transactions/${res.body.id}`)
       .expect(200)
       .expect((r) => expect(r.body.status).toBe('APPROVED'));
+
+    // El stock se descontó exactamente en la cantidad comprada (1).
+    const after = await request(http)
+      .get(`/api/v1/products/${SEEDED_PRODUCT_ID}/stock`)
+      .expect(200);
+    expect(after.body.availableUnits).toBe(stockBefore - 1);
   });
 
   it('POST /checkout rechazado -> 201 DECLINED', async () => {

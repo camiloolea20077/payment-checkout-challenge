@@ -21,14 +21,14 @@ export class PrismaTransactionRepository implements TransactionRepositoryPort {
   }
 
   async create(transaction: Transaction): Promise<Transaction> {
-    const record = await this.prisma.transaction.create({
+    const record = await this.prisma.client.transaction.create({
       data: this.toData(transaction),
     });
     return TransactionMapper.toDomain(record, this.currency);
   }
 
   async update(transaction: Transaction): Promise<Transaction> {
-    const record = await this.prisma.transaction.update({
+    const record = await this.prisma.client.transaction.update({
       where: { id: transaction.id },
       data: {
         status: transaction.status,
@@ -42,12 +42,14 @@ export class PrismaTransactionRepository implements TransactionRepositoryPort {
   }
 
   async findById(id: string): Promise<Transaction | null> {
-    const record = await this.prisma.transaction.findUnique({ where: { id } });
+    const record = await this.prisma.client.transaction.findUnique({
+      where: { id },
+    });
     return record ? TransactionMapper.toDomain(record, this.currency) : null;
   }
 
   async findByReference(reference: string): Promise<Transaction | null> {
-    const record = await this.prisma.transaction.findUnique({
+    const record = await this.prisma.client.transaction.findUnique({
       where: { reference },
     });
     return record ? TransactionMapper.toDomain(record, this.currency) : null;
@@ -56,7 +58,7 @@ export class PrismaTransactionRepository implements TransactionRepositoryPort {
   async findByIdempotencyKey(
     idempotencyKey: string,
   ): Promise<Transaction | null> {
-    const record = await this.prisma.transaction.findUnique({
+    const record = await this.prisma.client.transaction.findUnique({
       where: { idempotencyKey },
     });
     return record ? TransactionMapper.toDomain(record, this.currency) : null;

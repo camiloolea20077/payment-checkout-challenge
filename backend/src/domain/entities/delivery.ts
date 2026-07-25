@@ -64,6 +64,22 @@ export class Delivery {
     });
   }
 
+  /**
+   * Cambia el estado de la entrega a un estado válido dado.
+   *
+   * Usado por la operación administrativa de actualización de estado. Devuelve
+   * una nueva entrega para preservar la inmutabilidad.
+   *
+   * @param status - Nuevo estado de la entrega.
+   */
+  changeStatusTo(status: DeliveryStatus): Delivery {
+    return new Delivery({
+      ...this.toProps(),
+      status,
+      updatedAt: new Date(),
+    });
+  }
+
   private toProps(): DeliveryProps {
     return {
       id: this.id,

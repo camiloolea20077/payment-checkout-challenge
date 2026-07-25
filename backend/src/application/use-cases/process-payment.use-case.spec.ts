@@ -8,6 +8,7 @@ import {
 } from '../../domain/ports/outbound/payment-gateway.port';
 import { TransactionRepositoryPort } from '../../domain/ports/outbound/transaction-repository.port';
 import { Money } from '../../domain/value-objects/money';
+import { ConfirmSaleService } from '../services/confirm-sale.service';
 import { ProcessPaymentUseCase } from './process-payment.use-case';
 
 const card = {
@@ -47,6 +48,7 @@ const buildPending = (): Transaction =>
 const buildUseCase = (options: {
   transaction: Transaction | null;
   gateway: Partial<PaymentGatewayPort>;
+  confirm?: jest.Mock;
 }) => {
   const update = jest.fn((tx: Transaction) => Promise.resolve(tx));
   const transactionRepository: Partial<TransactionRepositoryPort> = {
@@ -56,12 +58,20 @@ const buildUseCase = (options: {
   const customerRepository: Partial<CustomerRepositoryPort> = {
     findById: jest.fn().mockResolvedValue(customer),
   };
+  const confirm =
+    options.confirm ??
+    jest.fn((tx: Transaction, pid: string, pstatus: string) =>
+      Promise.resolve(tx.approve(pid, pstatus)),
+    );
+  const confirmSale = { confirm } as unknown as ConfirmSaleService;
+
   const useCase = new ProcessPaymentUseCase(
     transactionRepository as TransactionRepositoryPort,
     customerRepository as CustomerRepositoryPort,
     options.gateway as PaymentGatewayPort,
+    confirmSale,
   );
-  return { useCase, update };
+  return { useCase, update, confirm };
 };
 
 const approvedResult: PaymentResult = {
@@ -72,8 +82,8 @@ const approvedResult: PaymentResult = {
 };
 
 describe('ProcessPaymentUseCase', () => {
-  it('aprueba la transacción cuando la pasarela aprueba', async () => {
-    const { useCase, update } = buildUseCase({
+  it('aprueba y confirma la venta cuando la pasarela aprueba', async () => {
+    const { useCase, confirm } = buildUseCase({
       transaction: buildPending(),
       gateway: { charge: jest.fn().mockResolvedValue(approvedResult) },
     });
@@ -81,11 +91,11 @@ describe('ProcessPaymentUseCase', () => {
 
     expect(result.ok).toBe(true);
     if (result.ok) expect(result.value.status).toBe('APPROVED');
-    expect(update).toHaveBeenCalledTimes(1);
+    expect(confirm).toHaveBeenCalledTimes(1);
   });
 
   it('rechaza la transacción cuando la pasarela rechaza', async () => {
-    const { useCase } = buildUseCase({
+    const { useCase, confirm } = buildUseCase({
       transaction: buildPending(),
       gateway: {
         charge: jest.fn().mockResolvedValue({
@@ -103,10 +113,11 @@ describe('ProcessPaymentUseCase', () => {
       expect(result.value.status).toBe('DECLINED');
       expect(result.value.failureReason).toBe('Fondos insuficientes');
     }
+    expect(confirm).not.toHaveBeenCalled();
   });
 
   it('un error de red deja la transacción en ERROR (nunca aprueba)', async () => {
-    const { useCase } = buildUseCase({
+    const { useCase, confirm } = buildUseCase({
       transaction: buildPending(),
       gateway: {
         charge: jest.fn().mockRejectedValue(new PaymentGatewayError('timeout')),
@@ -116,6 +127,7 @@ describe('ProcessPaymentUseCase', () => {
 
     expect(result.ok).toBe(true);
     if (result.ok) expect(result.value.status).toBe('ERROR');
+    expect(confirm).not.toHaveBeenCalled();
   });
 
   it('devuelve error si la transacción no existe', async () => {

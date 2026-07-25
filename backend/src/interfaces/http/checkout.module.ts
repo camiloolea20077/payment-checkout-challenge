@@ -1,4 +1,5 @@
 import { Module } from '@nestjs/common';
+import { ConfirmSaleService } from '../../application/services/confirm-sale.service';
 import { CheckoutUseCase } from '../../application/use-cases/checkout.use-case';
 import { CreateCustomerUseCase } from '../../application/use-cases/create-customer.use-case';
 import { CreateDeliveryUseCase } from '../../application/use-cases/create-delivery.use-case';
@@ -20,6 +21,7 @@ import { CheckoutController } from './controllers/checkout.controller';
     CreateDeliveryUseCase,
     CreatePendingTransactionUseCase,
     ProcessPaymentUseCase,
+    ConfirmSaleService,
   ],
 })
 export class CheckoutModule {}

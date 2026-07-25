@@ -12,7 +12,7 @@ export class PrismaCustomerRepository implements CustomerRepositoryPort {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(customer: Customer): Promise<Customer> {
-    const record = await this.prisma.customer.create({
+    const record = await this.prisma.client.customer.create({
       data: {
         id: customer.id,
         fullName: customer.fullName,
@@ -26,12 +26,16 @@ export class PrismaCustomerRepository implements CustomerRepositoryPort {
   }
 
   async findById(id: string): Promise<Customer | null> {
-    const record = await this.prisma.customer.findUnique({ where: { id } });
+    const record = await this.prisma.client.customer.findUnique({
+      where: { id },
+    });
     return record ? CustomerMapper.toDomain(record) : null;
   }
 
   async findByEmail(email: string): Promise<Customer | null> {
-    const record = await this.prisma.customer.findUnique({ where: { email } });
+    const record = await this.prisma.client.customer.findUnique({
+      where: { email },
+    });
     return record ? CustomerMapper.toDomain(record) : null;
   }
 }

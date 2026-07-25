@@ -21,7 +21,7 @@ export class PrismaDeliveryRepository implements DeliveryRepositoryPort {
   }
 
   async create(delivery: Delivery): Promise<Delivery> {
-    const record = await this.prisma.delivery.create({
+    const record = await this.prisma.client.delivery.create({
       data: {
         id: delivery.id,
         customerId: delivery.customerId,
@@ -37,12 +37,14 @@ export class PrismaDeliveryRepository implements DeliveryRepositoryPort {
   }
 
   async findById(id: string): Promise<Delivery | null> {
-    const record = await this.prisma.delivery.findUnique({ where: { id } });
+    const record = await this.prisma.client.delivery.findUnique({
+      where: { id },
+    });
     return record ? DeliveryMapper.toDomain(record, this.currency) : null;
   }
 
   async update(delivery: Delivery): Promise<Delivery> {
-    const record = await this.prisma.delivery.update({
+    const record = await this.prisma.client.delivery.update({
       where: { id: delivery.id },
       data: {
         status: delivery.status,

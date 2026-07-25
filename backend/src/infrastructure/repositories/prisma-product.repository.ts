@@ -24,12 +24,14 @@ export class PrismaProductRepository implements ProductRepositoryPort {
   }
 
   async findById(id: string): Promise<Product | null> {
-    const record = await this.prisma.product.findUnique({ where: { id } });
+    const record = await this.prisma.client.product.findUnique({
+      where: { id },
+    });
     return record ? ProductMapper.toDomain(record, this.currency) : null;
   }
 
   async findAllActive(): Promise<Product[]> {
-    const records = await this.prisma.product.findMany({
+    const records = await this.prisma.client.product.findMany({
       where: { isActive: true },
       orderBy: { createdAt: 'asc' },
     });

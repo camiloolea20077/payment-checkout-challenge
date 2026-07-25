@@ -7,6 +7,7 @@ import { PrismaModule } from './infrastructure/database/prisma/prisma.module';
 import { HealthController } from './interfaces/http/controllers/health.controller';
 import { AllExceptionsFilter } from './interfaces/http/filters/all-exceptions.filter';
 import { LoggingInterceptor } from './interfaces/http/interceptors/logging.interceptor';
+import { CheckoutModule } from './interfaces/http/checkout.module';
 import { CustomerModule } from './interfaces/http/customer.module';
 import { DeliveryModule } from './interfaces/http/delivery.module';
 import { ProductModule } from './interfaces/http/product.module';
@@ -40,6 +41,7 @@ import { TransactionModule } from './interfaces/http/transaction.module';
     CustomerModule,
     DeliveryModule,
     TransactionModule,
+    CheckoutModule,
   ],
   controllers: [HealthController],
   providers: [

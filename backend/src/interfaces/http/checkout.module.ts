@@ -1,21 +1,25 @@
 import { Module } from '@nestjs/common';
+import { CheckoutUseCase } from '../../application/use-cases/checkout.use-case';
+import { CreateCustomerUseCase } from '../../application/use-cases/create-customer.use-case';
+import { CreateDeliveryUseCase } from '../../application/use-cases/create-delivery.use-case';
 import { CreatePendingTransactionUseCase } from '../../application/use-cases/create-pending-transaction.use-case';
-import { GetTransactionUseCase } from '../../application/use-cases/get-transaction.use-case';
 import { ProcessPaymentUseCase } from '../../application/use-cases/process-payment.use-case';
 import { PaymentGatewayModule } from '../../infrastructure/payment-gateway/payment-gateway.module';
 import { RepositoriesModule } from '../../infrastructure/repositories/repositories.module';
-import { TransactionController } from './controllers/transaction.controller';
+import { CheckoutController } from './controllers/checkout.controller';
 
 /**
- * Módulo de transacciones (creación, consulta y procesamiento de pago).
+ * Módulo del checkout, que compone los casos de uso del flujo completo.
  */
 @Module({
   imports: [RepositoriesModule, PaymentGatewayModule],
-  controllers: [TransactionController],
+  controllers: [CheckoutController],
   providers: [
+    CheckoutUseCase,
+    CreateCustomerUseCase,
+    CreateDeliveryUseCase,
     CreatePendingTransactionUseCase,
-    GetTransactionUseCase,
     ProcessPaymentUseCase,
   ],
 })
-export class TransactionModule {}
+export class CheckoutModule {}

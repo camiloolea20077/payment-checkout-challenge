@@ -20,8 +20,10 @@ import {
 import { TransactionView } from '../../../application/dto/transaction-view';
 import { CreatePendingTransactionUseCase } from '../../../application/use-cases/create-pending-transaction.use-case';
 import { GetTransactionUseCase } from '../../../application/use-cases/get-transaction.use-case';
+import { ProcessPaymentUseCase } from '../../../application/use-cases/process-payment.use-case';
 import { domainErrorToHttp } from '../errors/domain-error.mapper';
 import { CreateTransactionDto } from '../request-dto/create-transaction.dto';
+import { ProcessPaymentDto } from '../request-dto/process-payment.dto';
 import { TransactionResponseDto } from '../response-dto/transaction-response.dto';
 
 /**
@@ -36,6 +38,7 @@ export class TransactionController {
   constructor(
     private readonly createPendingTransaction: CreatePendingTransactionUseCase,
     private readonly getTransaction: GetTransactionUseCase,
+    private readonly processPayment: ProcessPaymentUseCase,
   ) {}
 
   @Post()
@@ -54,6 +57,25 @@ export class TransactionController {
     const result = await this.createPendingTransaction.execute({
       ...dto,
       idempotencyKey,
+    });
+    if (!result.ok) {
+      throw domainErrorToHttp(result.error);
+    }
+    return result.value;
+  }
+
+  @Post(':id/process')
+  @HttpCode(HttpStatus.OK)
+  @ApiOperation({ summary: 'Procesa el pago de una transacción pendiente' })
+  @ApiOkResponse({ type: TransactionResponseDto })
+  @ApiNotFoundResponse({ description: 'La transacción no existe.' })
+  async process(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() dto: ProcessPaymentDto,
+  ): Promise<TransactionView> {
+    const result = await this.processPayment.execute({
+      transactionId: id,
+      card: dto.card,
     });
     if (!result.ok) {
       throw domainErrorToHttp(result.error);

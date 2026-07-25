@@ -1,14 +1,14 @@
-import { useNavigate } from 'react-router-dom';
-import type { Product } from '../../domain/entities/product';
-import { Card } from '../../shared/ui/card';
-import { EmptyState } from '../../shared/ui/empty-state';
-import { ErrorState } from '../../shared/ui/error-state';
-import { Skeleton } from '../../shared/ui/skeleton';
-import { ProductCard } from '../components/product/product-card';
-import { useProducts } from '../hooks/use-products';
-import { useAppDispatch } from '../store/hooks';
-import { setProductSelection, setStep } from '../store/slices/checkout-slice';
-import { productSelected } from '../store/slices/product-slice';
+import { useNavigate } from "react-router-dom";
+import type { Product } from "../../domain/entities/product";
+import { Card } from "../../shared/ui/card";
+import { EmptyState } from "../../shared/ui/empty-state";
+import { ErrorState } from "../../shared/ui/error-state";
+import { Skeleton } from "../../shared/ui/skeleton";
+import { ProductCard } from "../components/product/product-card";
+import { useProducts } from "../hooks/use-products";
+import { useAppDispatch } from "../store/hooks";
+import { setProductSelection, setStep } from "../store/slices/checkout-slice";
+import { productSelected } from "../store/slices/product-slice";
 
 /**
  * Página de producto (pasos 1 y 5 del flujo): muestra el catálogo con su stock
@@ -23,7 +23,7 @@ export function ProductPage() {
     dispatch(productSelected(product));
     dispatch(setProductSelection({ productId: product.id, quantity }));
     dispatch(setStep(2));
-    navigate('/checkout/payment');
+    navigate("/checkout/payment");
   };
 
   return (
@@ -37,20 +37,23 @@ export function ProductPage() {
         </p>
       </div>
 
-      {status === 'loading' && <ProductGridSkeleton />}
+      {status === "loading" && <ProductGridSkeleton />}
 
-      {status === 'failed' && (
-        <ErrorState message={error ?? 'No se pudo cargar el catálogo.'} onRetry={reload} />
+      {status === "failed" && (
+        <ErrorState
+          message={error ?? "No se pudo cargar el catálogo."}
+          onRetry={reload}
+        />
       )}
 
-      {status === 'succeeded' && products.length === 0 && (
+      {status === "succeeded" && products.length === 0 && (
         <EmptyState
           title="No hay productos disponibles"
           description="Vuelve más tarde: pronto tendremos novedades."
         />
       )}
 
-      {status === 'succeeded' && products.length > 0 && (
+      {status === "succeeded" && products.length > 0 && (
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} onBuy={handleBuy} />

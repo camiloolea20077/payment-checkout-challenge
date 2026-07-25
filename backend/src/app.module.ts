@@ -3,9 +3,11 @@ import { ConfigModule } from '@nestjs/config';
 import { APP_FILTER, APP_GUARD, APP_INTERCEPTOR } from '@nestjs/core';
 import { ThrottlerGuard, ThrottlerModule } from '@nestjs/throttler';
 import { validateEnvironment } from './infrastructure/configuration/environment.config';
+import { PrismaModule } from './infrastructure/database/prisma/prisma.module';
 import { HealthController } from './interfaces/http/controllers/health.controller';
 import { AllExceptionsFilter } from './interfaces/http/filters/all-exceptions.filter';
 import { LoggingInterceptor } from './interfaces/http/interceptors/logging.interceptor';
+import { ProductModule } from './interfaces/http/product.module';
 
 /**
  * Módulo raíz de la aplicación.
@@ -30,6 +32,8 @@ import { LoggingInterceptor } from './interfaces/http/interceptors/logging.inter
         limit: 100,
       },
     ]),
+    PrismaModule,
+    ProductModule,
   ],
   controllers: [HealthController],
   providers: [

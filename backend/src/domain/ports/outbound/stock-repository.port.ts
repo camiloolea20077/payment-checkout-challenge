@@ -21,6 +21,16 @@ export interface StockRepositoryPort {
   findByProductId(productId: string): Promise<Stock | null>;
 
   /**
+   * Obtiene el stock de varios productos en una sola consulta.
+   *
+   * Evita el problema N+1 al listar el catálogo con sus unidades disponibles.
+   *
+   * @param productIds - Identificadores de producto a consultar.
+   * @returns Los registros de stock encontrados (puede omitir los inexistentes).
+   */
+  findByProductIds(productIds: string[]): Promise<Stock[]>;
+
+  /**
    * Persiste el nuevo estado del stock aplicando bloqueo optimista.
    *
    * @param stock - Stock con la versión esperada y las unidades actualizadas.

@@ -4,6 +4,7 @@ import { Delivery } from '../../domain/entities/delivery';
 import { CustomerRepositoryPort } from '../../domain/ports/outbound/customer-repository.port';
 import { DeliveryRepositoryPort } from '../../domain/ports/outbound/delivery-repository.port';
 import { IdGeneratorPort } from '../../domain/ports/outbound/id-generator.port';
+import { EnvironmentVariables } from '../../infrastructure/configuration/environment.config';
 import { CreateDeliveryUseCase } from './create-delivery.use-case';
 
 const customer = new Customer({
@@ -37,7 +38,7 @@ const buildUseCase = (foundCustomer: Customer | null) => {
   };
   const config = {
     get: (key: string) => (key === 'CURRENCY' ? 'COP' : 10_000),
-  } as unknown as ConfigService;
+  } as unknown as ConfigService<EnvironmentVariables, true>;
   return new CreateDeliveryUseCase(
     customerRepository,
     deliveryRepository,

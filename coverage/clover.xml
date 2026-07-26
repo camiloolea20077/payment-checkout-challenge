@@ -1,0 +1,712 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<coverage generated="1785083000458" clover="3.2.0">
+  <project timestamp="1785083000458" name="All files">
+    <metrics statements="517" coveredstatements="481" conditionals="212" coveredconditionals="186" methods="116" coveredmethods="106" elements="845" coveredelements="773" complexity="0" loc="517" ncloc="517" packages="14" files="49" classes="49"/>
+    <package name="domain.errors">
+      <metrics statements="18" coveredstatements="14" conditionals="5" coveredconditionals="3" methods="6" coveredmethods="4"/>
+      <file name="checkout-errors.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\domain\errors\checkout-errors.ts">
+        <metrics statements="18" coveredstatements="14" conditionals="5" coveredconditionals="3" methods="6" coveredmethods="4"/>
+        <line num="7" count="6" type="stmt"/>
+        <line num="11" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="17" count="6" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="2" type="stmt"/>
+        <line num="25" count="6" type="stmt"/>
+        <line num="26" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="33" count="6" type="stmt"/>
+        <line num="34" count="0" type="stmt"/>
+        <line num="36" count="0" type="stmt"/>
+        <line num="41" count="6" type="stmt"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="44" count="0" type="stmt"/>
+        <line num="49" count="6" type="stmt"/>
+        <line num="50" count="1" type="stmt"/>
+        <line num="52" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.http">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="http-client.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\infrastructure\http\http-client.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="10" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="infrastructure.repositories">
+      <metrics statements="34" coveredstatements="31" conditionals="6" coveredconditionals="5" methods="8" coveredmethods="8"/>
+      <file name="axios-checkout.repository.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\infrastructure\repositories\axios-checkout.repository.ts">
+        <metrics statements="32" coveredstatements="29" conditionals="6" coveredconditionals="5" methods="8" coveredmethods="8"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="5" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="37" count="5" type="stmt"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="67" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="68" count="2" type="cond" truecount="2" falsecount="0"/>
+        <line num="69" count="1" type="stmt"/>
+        <line num="71" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="72" count="1" type="stmt"/>
+        <line num="75" count="1" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+        <line num="83" count="3" type="stmt"/>
+        <line num="84" count="3" type="stmt"/>
+        <line num="85" count="1" type="stmt"/>
+        <line num="87" count="2" type="stmt"/>
+        <line num="92" count="2" type="stmt"/>
+        <line num="93" count="2" type="stmt"/>
+        <line num="96" count="1" type="stmt"/>
+        <line num="98" count="1" type="stmt"/>
+        <line num="103" count="1" type="stmt"/>
+        <line num="104" count="1" type="stmt"/>
+        <line num="107" count="1" type="stmt"/>
+        <line num="109" count="0" type="stmt"/>
+        <line num="117" count="1" type="stmt"/>
+        <line num="118" count="1" type="stmt"/>
+        <line num="123" count="1" type="stmt"/>
+        <line num="125" count="0" type="stmt"/>
+        <line num="130" count="1" type="stmt"/>
+        <line num="131" count="1" type="stmt"/>
+        <line num="134" count="1" type="stmt"/>
+        <line num="136" count="0" type="stmt"/>
+      </file>
+      <file name="checkout-repository.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\infrastructure\repositories\checkout-repository.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.components.checkout">
+      <metrics statements="8" coveredstatements="8" conditionals="3" coveredconditionals="3" methods="3" coveredmethods="3"/>
+      <file name="amount-breakdown.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\components\checkout\amount-breakdown.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="3" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="18" count="3" type="stmt"/>
+        <line num="26" count="8" type="stmt"/>
+        <line num="58" count="32" type="stmt"/>
+      </file>
+      <file name="order-item.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\components\checkout\order-item.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="15" count="4" type="stmt"/>
+        <line num="22" count="43" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.components.product">
+      <metrics statements="27" coveredstatements="27" conditionals="13" coveredconditionals="13" methods="6" coveredmethods="6"/>
+      <file name="product-card.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\components\product\product-card.tsx">
+        <metrics statements="12" coveredstatements="12" conditionals="4" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="3" count="2" type="stmt"/>
+        <line num="4" count="2" type="stmt"/>
+        <line num="5" count="2" type="stmt"/>
+        <line num="6" count="2" type="stmt"/>
+        <line num="7" count="2" type="stmt"/>
+        <line num="8" count="2" type="stmt"/>
+        <line num="19" count="2" type="stmt"/>
+        <line num="20" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+      </file>
+      <file name="quantity-selector.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\components\product\quantity-selector.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="5" coveredconditionals="5" methods="3" coveredmethods="3"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="12" count="3" type="stmt"/>
+        <line num="22" count="3" type="stmt"/>
+        <line num="28" count="6" type="stmt"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="31" count="6" type="stmt"/>
+      </file>
+      <file name="stock-badge.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\components\product\stock-badge.tsx">
+        <metrics statements="8" coveredstatements="8" conditionals="4" coveredconditionals="4" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="8" type="cond" truecount="2" falsecount="0"/>
+        <line num="15" count="2" type="stmt"/>
+        <line num="17" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.forms">
+      <metrics statements="22" coveredstatements="22" conditionals="6" coveredconditionals="5" methods="6" coveredmethods="6"/>
+      <file name="checkout-form-schema.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\forms\checkout-form-schema.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="10" count="2" type="stmt"/>
+        <line num="17" count="21" type="stmt"/>
+        <line num="18" count="21" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="21" type="stmt"/>
+        <line num="37" count="21" type="stmt"/>
+      </file>
+      <file name="delivery-form.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\forms\delivery-form.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="24" count="35" type="stmt"/>
+      </file>
+      <file name="payment-card-form.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\forms\payment-card-form.tsx">
+        <metrics statements="9" coveredstatements="9" conditionals="4" coveredconditionals="3" methods="2" coveredmethods="2"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="37" count="35" type="cond" truecount="1" falsecount="1"/>
+        <line num="39" count="35" type="stmt"/>
+        <line num="72" count="16" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.hooks">
+      <metrics statements="93" coveredstatements="85" conditionals="24" coveredconditionals="19" methods="22" coveredmethods="20"/>
+      <file name="use-checkout.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\hooks\use-checkout.ts">
+        <metrics statements="35" coveredstatements="32" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="24" count="1" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="26" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+        <line num="29" count="13" type="stmt"/>
+        <line num="30" count="13" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="32" count="13" type="stmt"/>
+        <line num="34" count="13" type="stmt"/>
+        <line num="36" count="5" type="stmt"/>
+        <line num="38" count="5" type="stmt"/>
+        <line num="39" count="1" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="42" count="1" type="cond" truecount="5" falsecount="1"/>
+        <line num="43" count="0" type="stmt"/>
+        <line num="46" count="1" type="stmt"/>
+        <line num="47" count="1" type="stmt"/>
+        <line num="48" count="1" type="stmt"/>
+        <line num="49" count="1" type="stmt"/>
+        <line num="56" count="1" type="stmt"/>
+        <line num="60" count="1" type="stmt"/>
+        <line num="61" count="1" type="stmt"/>
+        <line num="62" count="1" type="stmt"/>
+        <line num="63" count="1" type="stmt"/>
+        <line num="65" count="0" type="stmt"/>
+        <line num="67" count="1" type="stmt"/>
+        <line num="81" count="5" type="stmt"/>
+      </file>
+      <file name="use-products.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\hooks\use-products.ts">
+        <metrics statements="18" coveredstatements="18" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="11" type="stmt"/>
+        <line num="22" count="11" type="stmt"/>
+        <line num="23" count="22" type="stmt"/>
+        <line num="25" count="11" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="28" count="4" type="stmt"/>
+        <line num="29" count="3" type="stmt"/>
+        <line num="31" count="1" type="stmt"/>
+        <line num="35" count="11" type="stmt"/>
+        <line num="36" count="3" type="stmt"/>
+        <line num="39" count="11" type="stmt"/>
+      </file>
+      <file name="use-selected-product.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\hooks\use-selected-product.ts">
+        <metrics statements="16" coveredstatements="13" conditionals="8" coveredconditionals="6" methods="6" coveredmethods="4"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="3" count="3" type="stmt"/>
+        <line num="4" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="46" type="stmt"/>
+        <line num="15" count="46" type="stmt"/>
+        <line num="16" count="64" type="stmt"/>
+        <line num="17" count="64" type="stmt"/>
+        <line num="19" count="46" type="cond" truecount="2" falsecount="0"/>
+        <line num="21" count="46" type="stmt"/>
+        <line num="22" count="6" type="cond" truecount="3" falsecount="1"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="30" count="46" type="cond" truecount="1" falsecount="1"/>
+      </file>
+      <file name="use-transaction-status.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\hooks\use-transaction-status.ts">
+        <metrics statements="24" coveredstatements="22" conditionals="8" coveredconditionals="7" methods="6" coveredmethods="6"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="21" count="6" type="stmt"/>
+        <line num="22" count="6" type="stmt"/>
+        <line num="23" count="14" type="stmt"/>
+        <line num="24" count="14" type="stmt"/>
+        <line num="25" count="14" type="stmt"/>
+        <line num="27" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="29" count="6" type="stmt"/>
+        <line num="30" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="31" count="0" type="stmt"/>
+        <line num="33" count="2" type="stmt"/>
+        <line num="34" count="2" type="stmt"/>
+        <line num="35" count="2" type="stmt"/>
+        <line num="36" count="2" type="stmt"/>
+        <line num="38" count="0" type="stmt"/>
+        <line num="42" count="6" type="stmt"/>
+        <line num="43" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="44" count="2" type="stmt"/>
+        <line num="48" count="6" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.pages">
+      <metrics statements="130" coveredstatements="110" conditionals="67" coveredconditionals="59" methods="18" coveredmethods="12"/>
+      <file name="payment-and-delivery-page.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\pages\payment-and-delivery-page.tsx">
+        <metrics statements="33" coveredstatements="26" conditionals="22" coveredconditionals="21" methods="4" coveredmethods="2"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+        <line num="30" count="35" type="stmt"/>
+        <line num="31" count="35" type="stmt"/>
+        <line num="32" count="35" type="stmt"/>
+        <line num="33" count="37" type="stmt"/>
+        <line num="35" count="35" type="stmt"/>
+        <line num="43" count="35" type="stmt"/>
+        <line num="66" count="35" type="cond" truecount="1" falsecount="1"/>
+        <line num="67" count="0" type="stmt"/>
+        <line num="70" count="35" type="stmt"/>
+        <line num="71" count="0" type="stmt"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="90" count="0" type="stmt"/>
+        <line num="98" count="0" type="stmt"/>
+        <line num="99" count="0" type="stmt"/>
+        <line num="102" count="35" type="stmt"/>
+        <line num="141" count="0" type="stmt"/>
+      </file>
+      <file name="product-page.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\pages\product-page.tsx">
+        <metrics statements="23" coveredstatements="19" conditionals="12" coveredconditionals="11" methods="5" coveredmethods="4"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="11" type="stmt"/>
+        <line num="19" count="11" type="stmt"/>
+        <line num="20" count="11" type="stmt"/>
+        <line num="22" count="11" type="stmt"/>
+        <line num="23" count="0" type="stmt"/>
+        <line num="24" count="0" type="stmt"/>
+        <line num="25" count="0" type="stmt"/>
+        <line num="26" count="0" type="stmt"/>
+        <line num="29" count="11" type="stmt"/>
+        <line num="59" count="2" type="stmt"/>
+        <line num="71" count="4" type="stmt"/>
+        <line num="74" count="24" type="stmt"/>
+      </file>
+      <file name="result-page.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\pages\result-page.tsx">
+        <metrics statements="42" coveredstatements="37" conditionals="21" coveredconditionals="19" methods="5" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="17" count="1" type="stmt"/>
+        <line num="18" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="65" count="1" type="stmt"/>
+        <line num="66" count="6" type="stmt"/>
+        <line num="67" count="6" type="stmt"/>
+        <line num="68" count="6" type="stmt"/>
+        <line num="70" count="6" type="stmt"/>
+        <line num="71" count="6" type="stmt"/>
+        <line num="72" count="14" type="stmt"/>
+        <line num="76" count="6" type="stmt"/>
+        <line num="77" count="2" type="stmt"/>
+        <line num="80" count="6" type="cond" truecount="1" falsecount="1"/>
+        <line num="81" count="0" type="stmt"/>
+        <line num="84" count="6" type="stmt"/>
+        <line num="85" count="0" type="stmt"/>
+        <line num="86" count="0" type="stmt"/>
+        <line num="87" count="0" type="stmt"/>
+        <line num="90" count="6" type="cond" truecount="4" falsecount="0"/>
+        <line num="91" count="2" type="stmt"/>
+        <line num="98" count="4" type="cond" truecount="2" falsecount="0"/>
+        <line num="99" count="2" type="stmt"/>
+        <line num="107" count="2" type="stmt"/>
+        <line num="108" count="2" type="stmt"/>
+        <line num="109" count="2" type="cond" truecount="1" falsecount="1"/>
+        <line num="113" count="2" type="stmt"/>
+        <line num="180" count="0" type="stmt"/>
+      </file>
+      <file name="summary-page.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\pages\summary-page.tsx">
+        <metrics statements="32" coveredstatements="28" conditionals="12" coveredconditionals="8" methods="4" coveredmethods="3"/>
+        <line num="1" count="1" type="stmt"/>
+        <line num="2" count="1" type="stmt"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="4" count="1" type="stmt"/>
+        <line num="5" count="1" type="stmt"/>
+        <line num="6" count="1" type="stmt"/>
+        <line num="7" count="1" type="stmt"/>
+        <line num="8" count="1" type="stmt"/>
+        <line num="9" count="1" type="stmt"/>
+        <line num="10" count="1" type="stmt"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="1" type="stmt"/>
+        <line num="14" count="1" type="stmt"/>
+        <line num="15" count="1" type="stmt"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="22" count="1" type="stmt"/>
+        <line num="23" count="5" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="25" count="13" type="stmt"/>
+        <line num="27" count="13" type="stmt"/>
+        <line num="28" count="5" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="32" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="33" count="0" type="stmt"/>
+        <line num="36" count="5" type="cond" truecount="3" falsecount="1"/>
+        <line num="37" count="0" type="stmt"/>
+        <line num="39" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="40" count="0" type="stmt"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="49" count="5" type="stmt"/>
+        <line num="100" count="0" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.providers">
+      <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+      <file name="repository-context.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\providers\repository-context.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="3" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="16" count="4" type="stmt"/>
+        <line num="17" count="68" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.store">
+      <metrics statements="14" coveredstatements="14" conditionals="2" coveredconditionals="2" methods="3" coveredmethods="3"/>
+      <file name="hooks.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\hooks.ts">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="5" count="120" type="stmt"/>
+        <line num="8" count="4" type="stmt"/>
+      </file>
+      <file name="persistence.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\persistence.ts">
+        <metrics statements="11" coveredstatements="11" conditionals="2" coveredconditionals="2" methods="2" coveredmethods="2"/>
+        <line num="3" count="1" type="stmt"/>
+        <line num="12" count="1" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="14" count="3" type="stmt"/>
+        <line num="15" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="16" count="1" type="stmt"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="27" count="1" type="stmt"/>
+        <line num="28" count="1" type="stmt"/>
+        <line num="29" count="1" type="stmt"/>
+      </file>
+    </package>
+    <package name="presentation.store.slices">
+      <metrics statements="50" coveredstatements="50" conditionals="0" coveredconditionals="0" methods="17" coveredmethods="17"/>
+      <file name="checkout-slice.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\slices\checkout-slice.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="6" coveredmethods="6"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="39" count="1" type="stmt"/>
+        <line num="42" count="1" type="stmt"/>
+        <line num="45" count="1" type="stmt"/>
+        <line num="48" count="2" type="stmt"/>
+        <line num="51" count="2" type="stmt"/>
+        <line num="54" count="1" type="stmt"/>
+        <line num="59" count="5" type="stmt"/>
+        <line num="68" count="5" type="stmt"/>
+      </file>
+      <file name="payment-slice.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\slices\payment-slice.ts">
+        <metrics statements="7" coveredstatements="7" conditionals="0" coveredconditionals="0" methods="2" coveredmethods="2"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="14" count="5" type="stmt"/>
+        <line num="18" count="5" type="stmt"/>
+        <line num="23" count="1" type="stmt"/>
+        <line num="26" count="3" type="stmt"/>
+        <line num="31" count="5" type="stmt"/>
+        <line num="33" count="5" type="stmt"/>
+      </file>
+      <file name="product-slice.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\slices\product-slice.ts">
+        <metrics statements="13" coveredstatements="13" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="17" count="5" type="stmt"/>
+        <line num="24" count="5" type="stmt"/>
+        <line num="29" count="5" type="stmt"/>
+        <line num="30" count="5" type="stmt"/>
+        <line num="33" count="4" type="stmt"/>
+        <line num="34" count="4" type="stmt"/>
+        <line num="37" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="41" count="2" type="stmt"/>
+        <line num="42" count="2" type="stmt"/>
+        <line num="47" count="5" type="stmt"/>
+        <line num="54" count="5" type="stmt"/>
+      </file>
+      <file name="transaction-slice.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\slices\transaction-slice.ts">
+        <metrics statements="12" coveredstatements="12" conditionals="0" coveredconditionals="0" methods="4" coveredmethods="4"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="21" count="5" type="stmt"/>
+        <line num="26" count="4" type="stmt"/>
+        <line num="27" count="4" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="4" type="stmt"/>
+        <line num="34" count="1" type="stmt"/>
+        <line num="35" count="1" type="stmt"/>
+        <line num="38" count="1" type="stmt"/>
+        <line num="43" count="5" type="stmt"/>
+        <line num="50" count="5" type="stmt"/>
+      </file>
+      <file name="ui-slice.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\presentation\store\slices\ui-slice.ts">
+        <metrics statements="6" coveredstatements="6" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="15" count="5" type="stmt"/>
+        <line num="20" count="3" type="stmt"/>
+        <line num="25" count="5" type="stmt"/>
+        <line num="27" count="5" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.constants">
+      <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+      <file name="checkout-steps.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\constants\checkout-steps.ts">
+        <metrics statements="1" coveredstatements="1" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+      </file>
+      <file name="product.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\constants\product.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="0" coveredmethods="0"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="5" count="3" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.ui">
+      <metrics statements="59" coveredstatements="59" conditionals="64" coveredconditionals="57" methods="17" coveredmethods="17"/>
+      <file name="alert.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\alert.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="11" coveredconditionals="8" methods="1" coveredmethods="1"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="13" count="4" type="stmt"/>
+        <line num="25" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="26" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="27" count="5" type="stmt"/>
+      </file>
+      <file name="backdrop.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\backdrop.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="12" count="2" type="cond" truecount="0" falsecount="1"/>
+        <line num="13" count="2" type="stmt"/>
+      </file>
+      <file name="badge.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\badge.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="1" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="4" type="stmt"/>
+        <line num="12" count="4" type="stmt"/>
+        <line num="24" count="4" type="cond" truecount="0" falsecount="1"/>
+        <line num="25" count="40" type="stmt"/>
+      </file>
+      <file name="button.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\button.tsx">
+        <metrics statements="6" coveredstatements="6" conditionals="10" coveredconditionals="10" methods="1" coveredmethods="1"/>
+        <line num="2" count="7" type="stmt"/>
+        <line num="3" count="7" type="stmt"/>
+        <line num="16" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+        <line num="38" count="7" type="stmt"/>
+        <line num="48" count="94" type="stmt"/>
+      </file>
+      <file name="card.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\card.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="2" count="5" type="stmt"/>
+        <line num="11" count="5" type="stmt"/>
+        <line num="12" count="148" type="stmt"/>
+      </file>
+      <file name="divider.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\divider.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="6" count="4" type="stmt"/>
+        <line num="7" count="18" type="stmt"/>
+      </file>
+      <file name="empty-state.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\empty-state.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="4" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="13" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+      </file>
+      <file name="error-state.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\error-state.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="3" coveredconditionals="3" methods="1" coveredmethods="1"/>
+        <line num="1" count="3" type="stmt"/>
+        <line num="2" count="3" type="stmt"/>
+        <line num="13" count="3" type="stmt"/>
+        <line num="18" count="4" type="stmt"/>
+      </file>
+      <file name="form-field.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\form-field.tsx">
+        <metrics statements="2" coveredstatements="2" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="18" count="2" type="stmt"/>
+        <line num="25" count="526" type="stmt"/>
+      </file>
+      <file name="input.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\input.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="5" coveredconditionals="5" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="14" count="2" type="stmt"/>
+        <line num="18" count="491" type="stmt"/>
+      </file>
+      <file name="price.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\price.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="6" type="stmt"/>
+        <line num="2" count="6" type="stmt"/>
+        <line num="13" count="6" type="stmt"/>
+        <line num="14" count="81" type="stmt"/>
+      </file>
+      <file name="select.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\select.tsx">
+        <metrics statements="5" coveredstatements="5" conditionals="5" coveredconditionals="4" methods="2" coveredmethods="2"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="2" count="2" type="stmt"/>
+        <line num="17" count="2" type="stmt"/>
+        <line num="19" count="36" type="stmt"/>
+        <line num="34" count="142" type="stmt"/>
+      </file>
+      <file name="skeleton.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\skeleton.tsx">
+        <metrics statements="3" coveredstatements="3" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="2" type="stmt"/>
+        <line num="11" count="2" type="stmt"/>
+        <line num="12" count="121" type="stmt"/>
+      </file>
+      <file name="spinner.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\spinner.tsx">
+        <metrics statements="4" coveredstatements="4" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="9" count="7" type="stmt"/>
+        <line num="20" count="7" type="stmt"/>
+        <line num="25" count="7" type="stmt"/>
+      </file>
+      <file name="stepper.tsx" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\ui\stepper.tsx">
+        <metrics statements="7" coveredstatements="7" conditionals="17" coveredconditionals="17" methods="2" coveredmethods="2"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="43" type="stmt"/>
+        <line num="18" count="129" type="stmt"/>
+        <line num="19" count="129" type="stmt"/>
+        <line num="20" count="129" type="stmt"/>
+        <line num="22" count="129" type="stmt"/>
+      </file>
+    </package>
+    <package name="shared.utils">
+      <metrics statements="51" coveredstatements="50" conditionals="22" coveredconditionals="20" methods="9" coveredmethods="9"/>
+      <file name="card.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\utils\card.ts">
+        <metrics statements="40" coveredstatements="39" conditionals="20" coveredconditionals="18" methods="6" coveredmethods="6"/>
+        <line num="5" count="4" type="stmt"/>
+        <line num="6" count="107" type="stmt"/>
+        <line num="14" count="4" type="stmt"/>
+        <line num="15" count="38" type="stmt"/>
+        <line num="16" count="38" type="cond" truecount="2" falsecount="0"/>
+        <line num="17" count="32" type="stmt"/>
+        <line num="19" count="6" type="cond" truecount="2" falsecount="0"/>
+        <line num="20" count="1" type="stmt"/>
+        <line num="22" count="5" type="stmt"/>
+        <line num="30" count="4" type="stmt"/>
+        <line num="31" count="24" type="stmt"/>
+        <line num="32" count="24" type="cond" truecount="2" falsecount="0"/>
+        <line num="33" count="13" type="stmt"/>
+        <line num="35" count="11" type="stmt"/>
+        <line num="36" count="11" type="stmt"/>
+        <line num="37" count="11" type="stmt"/>
+        <line num="38" count="170" type="stmt"/>
+        <line num="39" count="170" type="cond" truecount="2" falsecount="0"/>
+        <line num="40" count="84" type="stmt"/>
+        <line num="41" count="84" type="cond" truecount="1" falsecount="1"/>
+        <line num="42" count="0" type="stmt"/>
+        <line num="45" count="170" type="stmt"/>
+        <line num="46" count="170" type="stmt"/>
+        <line num="48" count="11" type="stmt"/>
+        <line num="52" count="4" type="stmt"/>
+        <line num="53" count="17" type="stmt"/>
+        <line num="62" count="4" type="stmt"/>
+        <line num="63" count="24" type="stmt"/>
+        <line num="64" count="24" type="stmt"/>
+        <line num="65" count="24" type="cond" truecount="6" falsecount="0"/>
+        <line num="66" count="17" type="stmt"/>
+        <line num="68" count="7" type="stmt"/>
+        <line num="69" count="7" type="stmt"/>
+        <line num="70" count="7" type="stmt"/>
+        <line num="71" count="7" type="cond" truecount="2" falsecount="0"/>
+        <line num="72" count="2" type="stmt"/>
+        <line num="74" count="5" type="cond" truecount="1" falsecount="1"/>
+        <line num="78" count="4" type="stmt"/>
+        <line num="79" count="6" type="stmt"/>
+        <line num="80" count="6" type="stmt"/>
+      </file>
+      <file name="cn.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\utils\cn.ts">
+        <metrics statements="4" coveredstatements="4" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="1" count="7" type="stmt"/>
+        <line num="2" count="7" type="stmt"/>
+        <line num="13" count="7" type="stmt"/>
+        <line num="14" count="1402" type="stmt"/>
+      </file>
+      <file name="error-message.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\utils\error-message.ts">
+        <metrics statements="5" coveredstatements="5" conditionals="2" coveredconditionals="2" methods="1" coveredmethods="1"/>
+        <line num="1" count="4" type="stmt"/>
+        <line num="9" count="4" type="stmt"/>
+        <line num="10" count="3" type="cond" truecount="2" falsecount="0"/>
+        <line num="11" count="1" type="stmt"/>
+        <line num="13" count="2" type="stmt"/>
+      </file>
+      <file name="money.ts" path="D:\Pruebas Tecnicas\payment-checkout-challenge\frontend\src\shared\utils\money.ts">
+        <metrics statements="2" coveredstatements="2" conditionals="0" coveredconditionals="0" methods="1" coveredmethods="1"/>
+        <line num="11" count="7" type="stmt"/>
+        <line num="12" count="83" type="stmt"/>
+      </file>
+    </package>
+  </project>
+</coverage>

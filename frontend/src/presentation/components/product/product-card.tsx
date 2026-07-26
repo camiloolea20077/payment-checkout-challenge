@@ -21,7 +21,7 @@ export function ProductCard({ product, onBuy }: ProductCardProps) {
   const isOutOfStock = product.availableUnits <= 0;
 
   return (
-    <Card className="flex flex-col overflow-hidden">
+    <Card className="flex flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
       <div className="aspect-[3/2] w-full overflow-hidden bg-slate-100">
         <img
           src={product.imageUrl}

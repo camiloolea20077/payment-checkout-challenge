@@ -54,7 +54,7 @@ export function ProductPage() {
       )}
 
       {status === "succeeded" && products.length > 0 && (
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div className="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-5">
           {products.map((product) => (
             <ProductCard key={product.id} product={product} onBuy={handleBuy} />
           ))}

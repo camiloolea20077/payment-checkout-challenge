@@ -1,45 +1,32 @@
-import { useEffect } from "react";
-import { Navigate, useNavigate } from "react-router-dom";
-import { env } from "../../infrastructure/configuration/env";
-import { CHECKOUT_STEPS } from "../../shared/constants/checkout-steps";
-import { Alert } from "../../shared/ui/alert";
-import { Backdrop } from "../../shared/ui/backdrop";
-import { Button } from "../../shared/ui/button";
-import { Card } from "../../shared/ui/card";
-import { Spinner } from "../../shared/ui/spinner";
-import { Stepper } from "../../shared/ui/stepper";
-import { maskCardNumber } from "../../shared/utils/card";
-import { PaymentSummary } from "../components/checkout/payment-summary";
-import { useCheckout } from "../hooks/use-checkout";
-import { useCheckoutRepository } from "../providers/repository-context";
-import { useAppDispatch, useAppSelector } from "../store/hooks";
-import { productSelected } from "../store/slices/product-slice";
+import { Navigate, useNavigate } from 'react-router-dom';
+import { env } from '../../infrastructure/configuration/env';
+import { CHECKOUT_STEPS } from '../../shared/constants/checkout-steps';
+import { Alert } from '../../shared/ui/alert';
+import { Backdrop } from '../../shared/ui/backdrop';
+import { Button } from '../../shared/ui/button';
+import { Card } from '../../shared/ui/card';
+import { Divider } from '../../shared/ui/divider';
+import { Spinner } from '../../shared/ui/spinner';
+import { Stepper } from '../../shared/ui/stepper';
+import { maskCardNumber } from '../../shared/utils/card';
+import { AmountBreakdown } from '../components/checkout/amount-breakdown';
+import { OrderItem } from '../components/checkout/order-item';
+import { useCheckout } from '../hooks/use-checkout';
+import { useSelectedProduct } from '../hooks/use-selected-product';
+import { useAppSelector } from '../store/hooks';
 
 /**
- * Página de resumen (paso 3): muestra el desglose, la entrega y la tarjeta
- * enmascarada, y dispara el pago con bloqueo de doble cobro.
+ * Página de resumen (paso 3): muestra el producto, el desglose, la entrega y la
+ * tarjeta enmascarada, y dispara el pago con bloqueo de doble cobro.
  */
 export function SummaryPage() {
   const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-  const repository = useCheckoutRepository();
-
   const { productId, quantity, delivery } = useAppSelector(
     (state) => state.checkout,
   );
-  const product = useAppSelector((state) => state.product.selected);
   const card = useAppSelector((state) => state.payment.card);
+  const product = useSelectedProduct();
   const { pay, isProcessing, error } = useCheckout();
-
-  // Tras recargar, el producto seleccionado no está en memoria: se recupera.
-  useEffect(() => {
-    if (productId !== null && (product === null || product.id !== productId)) {
-      void repository
-        .getProduct(productId)
-        .then((fetched) => dispatch(productSelected(fetched)))
-        .catch(() => undefined);
-    }
-  }, [productId, product, repository, dispatch]);
 
   // Guardas de flujo.
   if (productId === null) {
@@ -57,19 +44,31 @@ export function SummaryPage() {
     );
   }
 
+  const subtotalInCents = product.priceInCents * quantity;
+
   return (
     <section className="mx-auto max-w-2xl">
       <Stepper steps={[...CHECKOUT_STEPS]} current={2} />
 
       <div className="mt-6 space-y-6">
         <Card className="space-y-4 p-4 sm:p-6">
-          <h2 className="text-base font-semibold text-slate-900">Resumen</h2>
-          <PaymentSummary
-            productName={product.name}
+          <h2 className="text-base font-semibold text-slate-900">Tu pedido</h2>
+          <OrderItem
+            name={product.name}
+            imageUrl={product.imageUrl}
             quantity={quantity}
             priceInCents={product.priceInCents}
+            currency={product.currency}
+          />
+          <Divider />
+          <AmountBreakdown
+            itemLabel={`Subtotal (${quantity})`}
+            productAmountInCents={subtotalInCents}
             baseFeeInCents={env.baseFeeInCents}
             deliveryFeeInCents={env.deliveryFeeInCents}
+            totalAmountInCents={
+              subtotalInCents + env.baseFeeInCents + env.deliveryFeeInCents
+            }
             currency={product.currency}
           />
         </Card>
@@ -80,7 +79,7 @@ export function SummaryPage() {
             {delivery.address}, {delivery.city}, {delivery.department}
           </p>
           <p className="text-slate-600">
-            Método de pago:{" "}
+            Método de pago:{' '}
             <span className="font-medium text-slate-900">
               {maskCardNumber(card.number)}
             </span>
@@ -98,7 +97,7 @@ export function SummaryPage() {
             type="button"
             variant="secondary"
             disabled={isProcessing}
-            onClick={() => navigate("/checkout/payment")}
+            onClick={() => navigate('/checkout/payment')}
           >
             Volver
           </Button>

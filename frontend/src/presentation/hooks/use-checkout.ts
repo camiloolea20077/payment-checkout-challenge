@@ -5,7 +5,6 @@ import { errorMessage } from "../../shared/utils/error-message";
 import { useCheckoutRepository } from "../providers/repository-context";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import { setStep, setTransactionId } from "../store/slices/checkout-slice";
-import { clearCard } from "../store/slices/payment-slice";
 import {
   transactionFailed,
   transactionResolved,
@@ -17,8 +16,8 @@ import { setProcessingPayment } from "../store/slices/ui-slice";
  * Orquesta el pago desde el resumen.
  *
  * Genera una `Idempotency-Key` estable por montaje y bloquea reenvíos mientras
- * procesa, de modo que el doble clic no genere doble cobro. Tras el resultado,
- * limpia la tarjeta de memoria y navega a la pantalla de resultado.
+ * procesa, de modo que el doble clic no genere doble cobro. Al terminar, navega
+ * a la pantalla de resultado (donde se limpia la tarjeta de memoria).
  *
  * @returns `pay` para disparar el cobro, `isProcessing` y el `error`.
  */
@@ -60,7 +59,6 @@ export function useCheckout() {
       );
       dispatch(transactionResolved(transaction));
       dispatch(setTransactionId(transaction.id));
-      dispatch(clearCard());
       dispatch(setStep(4));
       navigate(`/checkout/result/${transaction.id}`);
     } catch (caught) {

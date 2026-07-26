@@ -10,8 +10,10 @@ import {
   checkoutFormSchema,
   type CheckoutFormValues,
 } from "../forms/checkout-form-schema";
+import { OrderItem } from "../components/checkout/order-item";
 import { DeliveryForm } from "../forms/delivery-form";
 import { PaymentCardForm } from "../forms/payment-card-form";
+import { useSelectedProduct } from "../hooks/use-selected-product";
 import { useAppDispatch, useAppSelector } from "../store/hooks";
 import {
   setCustomer,
@@ -27,9 +29,10 @@ import { setCard } from "../store/slices/payment-slice";
 export function PaymentAndDeliveryPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
-  const { productId, customer, delivery } = useAppSelector(
+  const { productId, quantity, customer, delivery } = useAppSelector(
     (state) => state.checkout,
   );
+  const product = useSelectedProduct();
 
   const {
     register,
@@ -99,6 +102,19 @@ export function PaymentAndDeliveryPage() {
   return (
     <section className="mx-auto max-w-3xl">
       <Stepper steps={[...CHECKOUT_STEPS]} current={1} />
+
+      {product && (
+        <Card className="mt-6 space-y-3 p-4 sm:p-6">
+          <h2 className="text-base font-semibold text-slate-900">Tu pedido</h2>
+          <OrderItem
+            name={product.name}
+            imageUrl={product.imageUrl}
+            quantity={quantity}
+            priceInCents={product.priceInCents}
+            currency={product.currency}
+          />
+        </Card>
+      )}
 
       <form
         className="mt-6 space-y-6"

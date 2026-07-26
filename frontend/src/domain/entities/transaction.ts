@@ -8,6 +8,7 @@ export interface Transaction {
   id: string;
   reference: string;
   status: TransactionStatus;
+  quantity: number;
   productAmountInCents: number;
   baseFeeInCents: number;
   deliveryFeeInCents: number;

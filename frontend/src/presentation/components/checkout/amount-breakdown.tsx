@@ -1,35 +1,32 @@
-import { Divider } from "../../../shared/ui/divider";
-import { Price } from "../../../shared/ui/price";
+import { Divider } from '../../../shared/ui/divider';
+import { Price } from '../../../shared/ui/price';
 
-interface PaymentSummaryProps {
-  productName: string;
-  quantity: number;
-  priceInCents: number;
+interface AmountBreakdownProps {
+  itemLabel: string;
+  productAmountInCents: number;
   baseFeeInCents: number;
   deliveryFeeInCents: number;
+  totalAmountInCents: number;
   currency: string;
 }
 
 /**
- * Desglose de importes del pedido: subtotal, tarifa base, envío y total.
- *
- * El total mostrado es una previsualización; el backend lo recalcula al cobrar.
+ * Desglose de importes (subtotal, tarifa base, envío y total) a partir de
+ * valores explícitos en centavos. En el resumen se usa con una previsualización
+ * y en el resultado con los importes reales de la transacción.
  */
-export function PaymentSummary({
-  productName,
-  quantity,
-  priceInCents,
+export function AmountBreakdown({
+  itemLabel,
+  productAmountInCents,
   baseFeeInCents,
   deliveryFeeInCents,
+  totalAmountInCents,
   currency,
-}: PaymentSummaryProps) {
-  const subtotalInCents = priceInCents * quantity;
-  const totalInCents = subtotalInCents + baseFeeInCents + deliveryFeeInCents;
-
+}: AmountBreakdownProps) {
   return (
     <div className="space-y-3">
-      <Row label={`${productName} × ${quantity}`}>
-        <Price amountInCents={subtotalInCents} currency={currency} />
+      <Row label={itemLabel}>
+        <Price amountInCents={productAmountInCents} currency={currency} />
       </Row>
       <Row label="Tarifa base">
         <Price amountInCents={baseFeeInCents} currency={currency} />
@@ -40,7 +37,7 @@ export function PaymentSummary({
       <Divider />
       <Row label="Total" strong>
         <Price
-          amountInCents={totalInCents}
+          amountInCents={totalAmountInCents}
           currency={currency}
           className="text-lg font-bold"
         />
@@ -61,7 +58,7 @@ function Row({
   return (
     <div className="flex items-center justify-between text-sm">
       <span
-        className={strong ? "font-semibold text-slate-900" : "text-slate-600"}
+        className={strong ? 'font-semibold text-slate-900' : 'text-slate-600'}
       >
         {label}
       </span>

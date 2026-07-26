@@ -25,6 +25,7 @@ interface TransactionResponse {
   id: string;
   reference: string;
   status: Transaction["status"];
+  quantity: number;
   productAmountInCents: number;
   baseFeeInCents: number;
   deliveryFeeInCents: number;
@@ -47,6 +48,7 @@ const toTransaction = (data: TransactionResponse): Transaction => ({
   id: data.id,
   reference: data.reference,
   status: data.status,
+  quantity: data.quantity,
   productAmountInCents: data.productAmountInCents,
   baseFeeInCents: data.baseFeeInCents,
   deliveryFeeInCents: data.deliveryFeeInCents,

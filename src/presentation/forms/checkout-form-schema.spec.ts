@@ -51,4 +51,19 @@ describe('checkoutFormSchema', () => {
     });
     expect(result.success).toBe(false);
   });
+
+  // El backend exige `postalCode` no vacío: si el formulario lo dejara pasar,
+  // el checkout fallaría con un 400 en lugar de avisar en pantalla.
+  it('rechaza código postal vacío', () => {
+    const result = checkoutFormSchema.safeParse({
+      ...validValues,
+      postalCode: '   ',
+    });
+    expect(result.success).toBe(false);
+  });
+
+  it('rechaza código postal ausente', () => {
+    const { postalCode: _omitted, ...withoutPostalCode } = validValues;
+    expect(checkoutFormSchema.safeParse(withoutPostalCode).success).toBe(false);
+  });
 });

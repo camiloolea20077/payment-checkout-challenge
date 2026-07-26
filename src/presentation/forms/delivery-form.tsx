@@ -119,7 +119,6 @@ export function DeliveryForm({ register, errors }: DeliveryFormProps) {
         <FormField
           id="postalCode"
           label="Código postal"
-          hint="Opcional"
           error={errors.postalCode?.message}
         >
           <Input

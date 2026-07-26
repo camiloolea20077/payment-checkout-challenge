@@ -67,7 +67,7 @@ describe('AxiosCheckoutRepository', () => {
           documentType: 'CC',
           documentNumber: '1',
         },
-        delivery: { address: 'a', city: 'b', department: 'c' },
+        delivery: { address: 'a', city: 'b', department: 'c', postalCode: 'd' },
         productId: 'p1',
         quantity: 2,
         card: {

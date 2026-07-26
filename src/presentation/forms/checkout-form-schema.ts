@@ -32,7 +32,11 @@ export const checkoutFormSchema = z
     address: z.string().trim().min(1, "Dirección obligatoria"),
     city: z.string().trim().min(1, "Ciudad obligatoria"),
     department: z.string().trim().min(1, "Departamento obligatorio"),
-    postalCode: z.string().trim().optional(),
+    postalCode: z
+      .string()
+      .trim()
+      .min(1, "Código postal obligatorio")
+      .max(20, "Máximo 20 caracteres"),
   })
   .refine((data) => isValidExpiry(data.expMonth, data.expYear), {
     message: "La tarjeta está vencida",

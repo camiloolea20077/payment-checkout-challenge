@@ -1,9 +1,23 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
-import { RootLayout } from "../layouts/root-layout";
-import { PaymentAndDeliveryPage } from "../pages/payment-and-delivery-page";
-import { ProductPage } from "../pages/product-page";
-import { ResultPage } from "../pages/result-page";
-import { SummaryPage } from "../pages/summary-page";
+import { lazy } from 'react';
+import { createBrowserRouter, Navigate } from 'react-router-dom';
+import { RootLayout } from '../layouts/root-layout';
+
+// Carga diferida por ruta (code-splitting): cada página se descarga solo cuando
+// se necesita, reduciendo el tamaño del bundle inicial.
+const ProductPage = lazy(() =>
+  import('../pages/product-page').then((m) => ({ default: m.ProductPage })),
+);
+const PaymentAndDeliveryPage = lazy(() =>
+  import('../pages/payment-and-delivery-page').then((m) => ({
+    default: m.PaymentAndDeliveryPage,
+  })),
+);
+const SummaryPage = lazy(() =>
+  import('../pages/summary-page').then((m) => ({ default: m.SummaryPage })),
+);
+const ResultPage = lazy(() =>
+  import('../pages/result-page').then((m) => ({ default: m.ResultPage })),
+);
 
 /**
  * Definición de rutas del flujo de checkout.
@@ -13,18 +27,15 @@ import { SummaryPage } from "../pages/summary-page";
  */
 export const appRouter = createBrowserRouter([
   {
-    path: "/",
+    path: '/',
     element: <RootLayout />,
     children: [
       { index: true, element: <Navigate to="/product" replace /> },
-      { path: "product", element: <ProductPage /> },
-      { path: "checkout/payment", element: <PaymentAndDeliveryPage /> },
-      { path: "checkout/summary", element: <SummaryPage /> },
-      {
-        path: "checkout/result/:transactionId",
-        element: <ResultPage />,
-      },
-      { path: "*", element: <Navigate to="/product" replace /> },
+      { path: 'product', element: <ProductPage /> },
+      { path: 'checkout/payment', element: <PaymentAndDeliveryPage /> },
+      { path: 'checkout/summary', element: <SummaryPage /> },
+      { path: 'checkout/result/:transactionId', element: <ResultPage /> },
+      { path: '*', element: <Navigate to="/product" replace /> },
     ],
   },
 ]);

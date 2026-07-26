@@ -100,7 +100,7 @@ describe('ConfirmSaleService', () => {
       buildStock(10),
     );
 
-    await service.confirm(transaction, 'wompi-1', 'APPROVED');
+    await service.confirm(transaction, 'prov-1', 'APPROVED');
 
     expect(stockUpdate).toHaveBeenCalledTimes(1);
     const savedStock = stockUpdate.mock.calls[0][0];
@@ -118,7 +118,7 @@ describe('ConfirmSaleService', () => {
       buildStock(10),
     );
 
-    await service.confirm(transaction, 'wompi-1', 'APPROVED');
+    await service.confirm(transaction, 'prov-1', 'APPROVED');
 
     expect(deliveryUpdate.mock.calls[0][0].status).toBe(
       DeliveryStatus.Assigned,
@@ -130,7 +130,7 @@ describe('ConfirmSaleService', () => {
     const { service, stockUpdate } = buildService(buildStock(1));
 
     await expect(
-      service.confirm(transaction, 'wompi-1', 'APPROVED'),
+      service.confirm(transaction, 'prov-1', 'APPROVED'),
     ).rejects.toBeInstanceOf(InsufficientStockError);
     expect(stockUpdate).not.toHaveBeenCalled();
   });
@@ -139,7 +139,7 @@ describe('ConfirmSaleService', () => {
     const { service } = buildService(null);
 
     await expect(
-      service.confirm(transaction, 'wompi-1', 'APPROVED'),
+      service.confirm(transaction, 'prov-1', 'APPROVED'),
     ).rejects.toBeInstanceOf(InsufficientStockError);
   });
 });

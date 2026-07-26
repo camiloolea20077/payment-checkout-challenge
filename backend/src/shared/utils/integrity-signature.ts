@@ -1,7 +1,7 @@
 import { createHash } from 'node:crypto';
 
 /**
- * Calcula la firma de integridad SHA-256 exigida por Wompi.
+ * Calcula la firma de integridad SHA-256 exigida por la pasarela de pagos.
  *
  * La firma es el hash hexadecimal de la concatenación, en este orden exacto:
  * `reference + amountInCents + currency + integritySecret`. El orden importa:

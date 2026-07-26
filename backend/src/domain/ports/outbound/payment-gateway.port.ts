@@ -48,7 +48,7 @@ export interface PaymentResult {
 /**
  * Puerto de salida para procesar pagos con una pasarela externa.
  *
- * La aplicación depende de esta abstracción; la implementación concreta (Wompi)
+ * La aplicación depende de esta abstracción; la implementación concreta (la pasarela)
  * vive en infraestructura y puede sustituirse o mockearse en pruebas (OCP/DIP).
  */
 export interface PaymentGatewayPort {

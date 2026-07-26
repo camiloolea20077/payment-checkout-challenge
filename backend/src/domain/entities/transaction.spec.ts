@@ -37,9 +37,9 @@ describe('Transaction', () => {
 
   describe('transiciones de estado', () => {
     it('aprueba una transacción pendiente', () => {
-      const approved = buildPending().approve('wompi-123', 'APPROVED');
+      const approved = buildPending().approve('prov-123', 'APPROVED');
       expect(approved.status).toBe(TransactionStatus.Approved);
-      expect(approved.providerTransactionId).toBe('wompi-123');
+      expect(approved.providerTransactionId).toBe('prov-123');
       expect(approved.isApproved()).toBe(true);
     });
 
@@ -59,22 +59,22 @@ describe('Transaction', () => {
     });
 
     it('no permite aprobar dos veces (evita doble cobro)', () => {
-      const approved = buildPending().approve('wompi-123', 'APPROVED');
-      expect(() => approved.approve('wompi-456', 'APPROVED')).toThrow(
+      const approved = buildPending().approve('prov-123', 'APPROVED');
+      expect(() => approved.approve('prov-456', 'APPROVED')).toThrow(
         InvalidTransactionStateError,
       );
     });
 
     it('no permite aprobar una transacción rechazada', () => {
       const declined = buildPending().decline('DECLINED', 'causa');
-      expect(() => declined.approve('wompi-1', 'APPROVED')).toThrow(
+      expect(() => declined.approve('prov-1', 'APPROVED')).toThrow(
         InvalidTransactionStateError,
       );
     });
 
     it('no muta la transacción original al transicionar', () => {
       const pending = buildPending();
-      pending.approve('wompi-123', 'APPROVED');
+      pending.approve('prov-123', 'APPROVED');
       expect(pending.status).toBe(TransactionStatus.Pending);
     });
   });

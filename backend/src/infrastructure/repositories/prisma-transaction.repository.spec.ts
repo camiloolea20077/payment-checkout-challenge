@@ -60,9 +60,7 @@ describe('PrismaTransactionRepository', () => {
     const repo = buildRepo({
       update: jest.fn().mockResolvedValue({ ...record, status: 'APPROVED' }),
     });
-    const result = await repo.update(
-      transaction.approve('wompi-1', 'APPROVED'),
-    );
+    const result = await repo.update(transaction.approve('prov-1', 'APPROVED'));
     expect(result.status).toBe('APPROVED');
   });
 

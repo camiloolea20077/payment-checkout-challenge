@@ -299,12 +299,12 @@ Qué se cubre:
 
 ## 14. Cobertura
 
-Última ejecución de `npm run test:cov` — 14 suites, 57 pruebas, todas en verde:
+Última ejecución de `npm run test:cov` — 14 suites, 59 pruebas, todas en verde:
 
 | Métrica | Cobertura |
 | --- | --- |
 | Statements | 93.27 % (499/535) |
-| Branches | 87.73 % (186/212) |
+| Branches | 86.79 % (184/212) |
 | Functions | 91.37 % (106/116) |
 | Lines | 93.03 % (481/517) |
 

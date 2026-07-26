@@ -10,13 +10,14 @@ export interface CustomerInput {
 }
 
 /**
- * Datos de la dirección de entrega. El código postal es opcional.
+ * Datos de la dirección de entrega. Todos los campos son obligatorios: el
+ * backend los exige para poder registrar la entrega.
  */
 export interface DeliveryInput {
   address: string;
   city: string;
   department: string;
-  postalCode?: string;
+  postalCode: string;
 }
 
 /**

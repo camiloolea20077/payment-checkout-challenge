@@ -51,7 +51,7 @@ describe('checkoutReducer', () => {
     s = checkoutReducer(s, setCustomer(customer));
     s = checkoutReducer(
       s,
-      setDelivery({ address: 'a', city: 'b', department: 'c' }),
+      setDelivery({ address: 'a', city: 'b', department: 'c', postalCode: 'd' }),
     );
     s = checkoutReducer(s, setTransactionId('tx1'));
     s = checkoutReducer(s, setStep(3));

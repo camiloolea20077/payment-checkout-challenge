@@ -40,6 +40,7 @@ const store = () =>
         address: 'Calle 1',
         city: 'Bogotá',
         department: 'Cundinamarca',
+        postalCode: '110111',
       },
       transactionId: 'tx1',
     },

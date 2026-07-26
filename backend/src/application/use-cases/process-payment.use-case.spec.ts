@@ -75,7 +75,7 @@ const buildUseCase = (options: {
 };
 
 const approvedResult: PaymentResult = {
-  providerTransactionId: 'wompi-1',
+  providerTransactionId: 'prov-1',
   status: 'APPROVED',
   providerStatus: 'APPROVED',
   failureReason: null,
@@ -99,7 +99,7 @@ describe('ProcessPaymentUseCase', () => {
       transaction: buildPending(),
       gateway: {
         charge: jest.fn().mockResolvedValue({
-          providerTransactionId: 'wompi-2',
+          providerTransactionId: 'prov-2',
           status: 'DECLINED',
           providerStatus: 'DECLINED',
           failureReason: 'Fondos insuficientes',
@@ -142,7 +142,7 @@ describe('ProcessPaymentUseCase', () => {
   });
 
   it('es idempotente: no re-cobra una transacción ya aprobada', async () => {
-    const approved = buildPending().approve('wompi-1', 'APPROVED');
+    const approved = buildPending().approve('prov-1', 'APPROVED');
     const charge = jest.fn();
     const { useCase } = buildUseCase({
       transaction: approved,

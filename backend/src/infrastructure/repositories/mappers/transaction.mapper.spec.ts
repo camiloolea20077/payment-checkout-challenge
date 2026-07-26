@@ -15,7 +15,7 @@ const record: PrismaTransaction = {
   totalAmountInCents: 75_000,
   currency: 'COP',
   status: 'APPROVED',
-  providerTransactionId: 'wompi-1',
+  providerTransactionId: 'prov-1',
   providerStatus: 'APPROVED',
   failureReason: null,
   idempotencyKey: 'key-1',
@@ -29,6 +29,6 @@ describe('TransactionMapper', () => {
     expect(transaction.id).toBe('tx-1');
     expect(transaction.status).toBe(TransactionStatus.Approved);
     expect(transaction.totalAmount.amountInCents).toBe(75_000);
-    expect(transaction.providerTransactionId).toBe('wompi-1');
+    expect(transaction.providerTransactionId).toBe('prov-1');
   });
 });

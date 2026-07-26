@@ -45,9 +45,7 @@ async function bootstrap(): Promise<void> {
 
   const swaggerConfig = new DocumentBuilder()
     .setTitle('Checkout API')
-    .setDescription(
-      'API de checkout con pago por tarjeta en ambiente Wompi Sandbox.',
-    )
+    .setDescription('API de checkout con pago por tarjeta en ambiente Sandbox.')
     .setVersion('1.0.0')
     .build();
   const document = SwaggerModule.createDocument(app, swaggerConfig);

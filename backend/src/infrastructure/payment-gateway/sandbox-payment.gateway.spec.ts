@@ -3,7 +3,7 @@ import { ConfigService } from '@nestjs/config';
 import { of, throwError } from 'rxjs';
 import { PaymentGatewayError } from '../../domain/errors/payment-gateway.error';
 import { ChargeCommand } from '../../domain/ports/outbound/payment-gateway.port';
-import { WompiPaymentGateway } from './wompi-payment.gateway';
+import { SandboxPaymentGateway } from './sandbox-payment.gateway';
 
 const command: ChargeCommand = {
   reference: 'TXN-1',
@@ -32,7 +32,7 @@ const config = {
   },
 } as unknown as ConfigService;
 
-describe('WompiPaymentGateway', () => {
+describe('SandboxPaymentGateway', () => {
   it('procesa el cobro y normaliza el estado aprobado', async () => {
     const get = jest
       .fn()
@@ -44,21 +44,21 @@ describe('WompiPaymentGateway', () => {
         }),
       )
       .mockReturnValue(
-        of({ data: { data: { id: 'wompi-1', status: 'APPROVED' } } }),
+        of({ data: { data: { id: 'prov-1', status: 'APPROVED' } } }),
       );
     const post = jest
       .fn()
       .mockReturnValueOnce(of({ data: { data: { id: 'tok_1' } } }))
       .mockReturnValueOnce(
-        of({ data: { data: { id: 'wompi-1', status: 'PENDING' } } }),
+        of({ data: { data: { id: 'prov-1', status: 'PENDING' } } }),
       );
     const http = { get, post } as unknown as HttpService;
 
-    const gateway = new WompiPaymentGateway(http, config);
+    const gateway = new SandboxPaymentGateway(http, config);
     const result = await gateway.charge(command);
 
     expect(result.status).toBe('APPROVED');
-    expect(result.providerTransactionId).toBe('wompi-1');
+    expect(result.providerTransactionId).toBe('prov-1');
     // Firma de integridad enviada en el cuerpo de la creación.
     const createBody = post.mock.calls[1][1] as { signature: string };
     expect(createBody.signature).toHaveLength(64);
@@ -70,7 +70,7 @@ describe('WompiPaymentGateway', () => {
       post: jest.fn(),
     } as unknown as HttpService;
 
-    const gateway = new WompiPaymentGateway(http, config);
+    const gateway = new SandboxPaymentGateway(http, config);
 
     await expect(gateway.charge(command)).rejects.toBeInstanceOf(
       PaymentGatewayError,

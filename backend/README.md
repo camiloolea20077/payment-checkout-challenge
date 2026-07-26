@@ -1,7 +1,7 @@
 # Backend — Prueba FullStack de Checkout
 
 API REST para un flujo de compra de un producto con pago mediante tarjeta en el
-ambiente **Sandbox de Wompi**. Construida con **NestJS + TypeScript + Prisma 7 +
+ambiente **Sandbox de la pasarela de pagos**. Construida con **NestJS + TypeScript + Prisma 7 +
 PostgreSQL**, aplicando **Arquitectura Hexagonal**, **Clean Architecture**,
 principios **SOLID** y **Railway Oriented Programming**.
 
@@ -54,7 +54,7 @@ src/
 ├── infrastructure/         # Implementaciones concretas
 │   ├── database/prisma/    # PrismaService (+ unidad de trabajo con AsyncLocalStorage)
 │   ├── repositories/       # Repos Prisma + mappers dominio↔persistencia
-│   ├── payment-gateway/    # WompiPaymentGateway (adapter)
+│   ├── payment-gateway/    # SandboxPaymentGateway (adapter)
 │   ├── configuration/      # Validación de variables de entorno
 │   └── services/           # UuidGenerator
 │
@@ -75,7 +75,7 @@ interfaces ─▶ application ─▶ domain ◀─ infrastructure
 
 - El **dominio** no depende de NestJS, Prisma, Axios ni PostgreSQL.
 - La **aplicación** depende de puertos (interfaces), no de implementaciones.
-- La **infraestructura** implementa los puertos (Prisma, Wompi).
+- La **infraestructura** implementa los puertos (Prisma, la pasarela de pagos).
 - Los **controladores** no contienen lógica de negocio.
 
 ---
@@ -117,7 +117,7 @@ Todos los valores monetarios se manejan como **enteros de centavos** (nunca
 
 ## 6. Instalación
 
-Requisitos: Node.js 20+, PostgreSQL local con una base `prueba_wompi`.
+Requisitos: Node.js 20+, PostgreSQL local con una base `payment_checkout`.
 
 ```bash
 cd backend
@@ -134,10 +134,10 @@ Ver `.env.example`. Nunca se sube `.env` al repositorio.
 ```env
 NODE_ENV=development
 PORT=3000
-DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/prueba_wompi?schema=public"
+DATABASE_URL="postgresql://USER:PASSWORD@localhost:5432/payment_checkout?schema=public"
 FRONTEND_URL="http://localhost:5173"
 
-PAYMENT_API_URL="https://api-sandbox.co.uat.wompi.dev/v1"
+PAYMENT_API_URL="https://<sandbox-api-host>/v1"
 PAYMENT_PUBLIC_KEY="pub_stagtest_..."
 PAYMENT_PRIVATE_KEY="prv_stagtest_..."
 PAYMENT_INTEGRITY_SECRET="stagtest_integrity_..."
@@ -204,7 +204,7 @@ npm run build && npm run start:prod   # producción
 3. Consultar producto (activo) y validar stock.
 4. Calcular importes y crear transacción `PENDING` (**total recalculado**).
 5. Generar referencia y **firma de integridad SHA-256**.
-6. Tokenizar la tarjeta y crear la transacción en Wompi; consultar el resultado.
+6. Tokenizar la tarjeta y crear la transacción en la pasarela de pagos; consultar el resultado.
 7. Según el resultado:
    - **APPROVED** → en una **única transacción de base de datos**: revalidar y
      **descontar stock** (lock optimista), registrar `StockMovement`, **asignar
@@ -273,7 +273,7 @@ de la red.
 - Si el pago se aprueba pero el stock se agotó entre la creación y la aprobación,
   la transacción se marca `ERROR`; una mejora sería **reversar/anular** el cobro
   automáticamente (VOID) y notificar.
-- No hay **webhook** de Wompi implementado (se usa polling); el `PAYMENT_EVENTS_SECRET`
+- No hay **webhook** de la pasarela de pagos implementado (se usa polling); el `PAYMENT_EVENTS_SECRET`
   queda listo para validarlo como mejora.
 - Reintentos de la pasarela con backoff configurable.
 - Reserva temporal de stock (`reserved_units`) durante el `PENDING`.

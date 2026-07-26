@@ -23,28 +23,28 @@ const TERMINAL_STATUSES: ReadonlySet<string> = new Set([
 const MAX_POLL_ATTEMPTS = 5;
 const POLL_DELAY_MS = 1500;
 
-/** Forma mínima de las respuestas de Wompi que consumimos. */
-interface WompiAcceptanceResponse {
+/** Forma mínima de las respuestas de la pasarela que consumimos. */
+interface GatewayAcceptanceResponse {
   data: { presigned_acceptance: { acceptance_token: string } };
 }
-interface WompiTokenResponse {
+interface GatewayTokenResponse {
   data: { id: string };
 }
-interface WompiTransactionResponse {
+interface GatewayTransactionResponse {
   data: { id: string; status: string; status_message?: string | null };
 }
 
 /**
  * Implementación del puerto {@link PaymentGatewayPort} contra la API Sandbox de
- * Wompi.
+ * la pasarela.
  *
- * Orquesta el flujo de Wompi: token de aceptación, tokenización de la tarjeta,
+ * Orquesta el flujo de la pasarela: token de aceptación, tokenización de la tarjeta,
  * firma de integridad, creación de la transacción y consulta del resultado.
  * Nunca registra datos sensibles de tarjeta en logs.
  */
 @Injectable()
-export class WompiPaymentGateway implements PaymentGatewayPort {
-  private readonly logger = new Logger(WompiPaymentGateway.name);
+export class SandboxPaymentGateway implements PaymentGatewayPort {
+  private readonly logger = new Logger(SandboxPaymentGateway.name);
   private readonly apiUrl: string;
   private readonly publicKey: string;
   private readonly privateKey: string;
@@ -92,7 +92,7 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
   /** Obtiene el token de aceptación requerido para crear la transacción. */
   private async fetchAcceptanceToken(): Promise<string> {
     const response = await firstValueFrom(
-      this.http.get<WompiAcceptanceResponse>(
+      this.http.get<GatewayAcceptanceResponse>(
         `${this.apiUrl}/merchants/${this.publicKey}`,
       ),
     );
@@ -102,7 +102,7 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
   /** Tokeniza la tarjeta con la llave pública; el token es de un solo uso. */
   private async tokenizeCard(command: ChargeCommand): Promise<string> {
     const response = await firstValueFrom(
-      this.http.post<WompiTokenResponse>(
+      this.http.post<GatewayTokenResponse>(
         `${this.apiUrl}/tokens/cards`,
         {
           number: command.card.number,
@@ -118,7 +118,7 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
   }
 
   /**
-   * Firma de integridad SHA-256 exigida por Wompi:
+   * Firma de integridad SHA-256 exigida por la pasarela:
    * `SHA256(reference + amount_in_cents + currency + integritySecret)`.
    */
   private buildSignature(command: ChargeCommand): string {
@@ -130,15 +130,15 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
     );
   }
 
-  /** Crea la transacción en Wompi con la llave privada. */
+  /** Crea la transacción en la pasarela con la llave privada. */
   private async createTransaction(
     command: ChargeCommand,
     acceptanceToken: string,
     cardToken: string,
     signature: string,
-  ): Promise<WompiTransactionResponse> {
+  ): Promise<GatewayTransactionResponse> {
     const response = await firstValueFrom(
-      this.http.post<WompiTransactionResponse>(
+      this.http.post<GatewayTransactionResponse>(
         `${this.apiUrl}/transactions`,
         {
           amount_in_cents: command.amountInCents,
@@ -165,12 +165,12 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
    */
   private async pollUntilTerminal(
     transactionId: string,
-  ): Promise<WompiTransactionResponse['data']> {
-    let last: WompiTransactionResponse['data'] | null = null;
+  ): Promise<GatewayTransactionResponse['data']> {
+    let last: GatewayTransactionResponse['data'] | null = null;
 
     for (let attempt = 0; attempt < MAX_POLL_ATTEMPTS; attempt += 1) {
       const response = await firstValueFrom(
-        this.http.get<WompiTransactionResponse>(
+        this.http.get<GatewayTransactionResponse>(
           `${this.apiUrl}/transactions/${transactionId}`,
         ),
       );
@@ -181,11 +181,11 @@ export class WompiPaymentGateway implements PaymentGatewayPort {
       await this.delay(POLL_DELAY_MS);
     }
 
-    return last as WompiTransactionResponse['data'];
+    return last as GatewayTransactionResponse['data'];
   }
 
-  /** Normaliza la respuesta de Wompi al resultado del dominio. */
-  private toResult(data: WompiTransactionResponse['data']): PaymentResult {
+  /** Normaliza la respuesta de la pasarela al resultado del dominio. */
+  private toResult(data: GatewayTransactionResponse['data']): PaymentResult {
     const status: GatewayPaymentStatus = TERMINAL_STATUSES.has(data.status)
       ? (data.status as GatewayPaymentStatus)
       : 'PENDING';

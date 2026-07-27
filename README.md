@@ -8,6 +8,16 @@ producto con el stock actualizado.
 El backend vive en un repositorio aparte; esta aplicación lo consume vía HTTP
 (`VITE_API_BASE_URL`).
 
+## Enlaces
+
+| Recurso | URL |
+| --- | --- |
+| **App desplegada** | https://payment-checkout-challenge-front.vercel.app/product |
+| **API** | https://back-prueba.cloudtecnology.cloud/api/v1 |
+| **Swagger de la API** | https://back-prueba.cloudtecnology.cloud/api/docs |
+| Repositorio del frontend | https://github.com/camiloolea20077/payment-checkout-challenge |
+| Repositorio del backend | https://github.com/camiloolea20077/payment-checkout-challenge-back |
+
 ---
 
 ## 1. Objetivo
@@ -106,7 +116,8 @@ src/
 │   ├── pages/               # product, payment-and-delivery, summary, result
 │   ├── components/          # checkout/ y product/
 │   ├── forms/               # delivery-form, payment-card-form, esquema Zod
-│   ├── hooks/               # use-products, use-selected-product, use-checkout, use-transaction-status
+│   ├── hooks/               # use-products, use-product-detail, use-selected-product,
+│   │                        # use-checkout, use-transaction-status
 │   ├── layouts/             # root-layout (header + stepper + Suspense)
 │   ├── providers/           # repository-context
 │   ├── routes/              # app-router (lazy por ruta)
@@ -114,8 +125,8 @@ src/
 │
 ├── shared/
 │   ├── ui/                  # Button, Input, Select, FormField, Card, Badge, Alert,
-│   │                        # Backdrop, Skeleton, Spinner, Stepper, Price, Divider,
-│   │                        # EmptyState, ErrorState
+│   │                        # Modal, Backdrop, Skeleton, Spinner, Stepper, Price,
+│   │                        # Divider, EmptyState, ErrorState
 │   ├── utils/               # card (Luhn, marca, máscara), money, cn, error-message
 │   └── constants/           # checkout-steps, product
 │
@@ -131,7 +142,7 @@ src/
 | Ruta | Página | Descripción |
 | --- | --- | --- |
 | `/` | — | Redirige a `/product` |
-| `/product` | `ProductPage` | Catálogo, stock, selector de cantidad y CTA de pago |
+| `/product` | `ProductPage` | Catálogo, stock, selector de cantidad, detalle en modal y CTA de pago |
 | `/checkout/payment` | `PaymentAndDeliveryPage` | Formulario de tarjeta y de entrega |
 | `/checkout/summary` | `SummaryPage` | Desglose de montos y confirmación del pago |
 | `/checkout/result/:transactionId` | `ResultPage` | Estado final de la transacción |
@@ -212,6 +223,8 @@ Mobile-first, verificado desde 320 px hasta 1440 px.
 - Labels asociados a cada control y errores enlazados con `aria-describedby`.
 - Mensajes de estado y de error anunciados con `aria-live`.
 - Botones reales (`<button>`), orden de tabulación natural y foco visible.
+- El modal atrapa el foco, cierra con `Escape` o clic en el fondo y devuelve el
+  foco al elemento que lo abrió.
 - Jerarquía de headings coherente, texto alternativo en imágenes.
 - El estado no depende solo del color (badges e iconos acompañan al texto).
 
@@ -283,6 +296,10 @@ Qué se cubre:
 
 - **ProductPage** — render del catálogo, precio y stock, límites de cantidad,
   bloqueo del pago sin stock y estado de error.
+- **Detalle en modal** — consulta a `GET /products/:id`, render de imagen,
+  descripción, precio y stock, compra con la cantidad elegida, sin stock,
+  reintento tras error, y accesibilidad del diálogo (trampa de foco, `Escape`,
+  clic en el fondo, bloqueo de scroll y devolución del foco).
 - **Formularios** — validación de campos, Luhn, vencimiento futuro, CVC,
   detección de Visa/Mastercard y continuación al resumen.
 - **SummaryPage** — subtotal, tarifa base, tarifa de entrega, total, tarjeta
@@ -299,14 +316,14 @@ Qué se cubre:
 
 ## 14. Cobertura
 
-Última ejecución de `npm run test:cov` — 14 suites, 59 pruebas, todas en verde:
+Última ejecución de `npm run test:cov` — 16 suites, 75 pruebas, todas en verde:
 
 | Métrica | Cobertura |
 | --- | --- |
-| Statements | 93.27 % (499/535) |
-| Branches | 86.79 % (184/212) |
-| Functions | 91.37 % (106/116) |
-| Lines | 93.03 % (481/517) |
+| Statements | 93.49 % (589/630) |
+| Branches | 87.15 % (224/257) |
+| Functions | 90.76 % (118/130) |
+| Lines | 93.30 % (571/612) |
 
 Por encima del 80 % exigido. Quedan fuera del cálculo los archivos sin lógica
 propia: `main.tsx`, `App.tsx`, el router, el layout, la creación del store, la

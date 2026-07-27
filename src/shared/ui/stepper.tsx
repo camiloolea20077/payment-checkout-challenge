@@ -20,7 +20,10 @@ export function Stepper({ steps, current }: StepperProps) {
         const isCurrent = stepNumber === current;
 
         return (
-          <li key={label} className="flex flex-1 items-center gap-2">
+          <li
+            key={label}
+            className="flex flex-1 flex-col items-center gap-1.5 sm:flex-row sm:gap-2"
+          >
             <span
               aria-current={isCurrent ? "step" : undefined}
               className={cn(
@@ -32,9 +35,11 @@ export function Stepper({ steps, current }: StepperProps) {
             >
               {isCompleted ? "✓" : stepNumber}
             </span>
+            {/* En móvil la etiqueta va bajo el círculo: ocultarla dejaría el
+                progreso comunicado solo por color y posición. */}
             <span
               className={cn(
-                "hidden text-sm font-medium sm:inline",
+                "text-center text-xs font-medium sm:text-sm",
                 isCurrent ? "text-slate-900" : "text-slate-500",
               )}
             >

@@ -16,7 +16,9 @@ const product: Product = {
 describe('ProductCard', () => {
   it('muestra nombre, precio y permite comprar con la cantidad elegida', async () => {
     const onBuy = jest.fn();
-    render(<ProductCard product={product} onBuy={onBuy} />);
+    render(
+      <ProductCard product={product} onBuy={onBuy} onViewDetail={jest.fn()} />,
+    );
 
     expect(screen.getByText('Teclado mecánico')).toBeInTheDocument();
     await userEvent.click(screen.getByLabelText('Aumentar cantidad'));
@@ -29,9 +31,26 @@ describe('ProductCard', () => {
   it('deshabilita la compra si no hay stock', () => {
     const onBuy = jest.fn();
     render(
-      <ProductCard product={{ ...product, availableUnits: 0 }} onBuy={onBuy} />,
+      <ProductCard
+        product={{ ...product, availableUnits: 0 }}
+        onBuy={onBuy}
+        onViewDetail={jest.fn()}
+      />,
     );
     expect(screen.getByRole('button', { name: 'Sin stock' })).toBeDisabled();
     expect(screen.queryByLabelText('Aumentar cantidad')).not.toBeInTheDocument();
+  });
+
+  it('pide abrir el detalle del producto', async () => {
+    const onViewDetail = jest.fn();
+    render(
+      <ProductCard
+        product={product}
+        onBuy={jest.fn()}
+        onViewDetail={onViewDetail}
+      />,
+    );
+    await userEvent.click(screen.getByRole('button', { name: 'Ver detalle' }));
+    expect(onViewDetail).toHaveBeenCalledWith(product);
   });
 });

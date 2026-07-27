@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import type { Product } from "../../domain/entities/product";
 import { Card } from "../../shared/ui/card";
@@ -5,6 +6,7 @@ import { EmptyState } from "../../shared/ui/empty-state";
 import { ErrorState } from "../../shared/ui/error-state";
 import { Skeleton } from "../../shared/ui/skeleton";
 import { ProductCard } from "../components/product/product-card";
+import { ProductDetailModal } from "../components/product/product-detail-modal";
 import { useProducts } from "../hooks/use-products";
 import { useAppDispatch } from "../store/hooks";
 import { setProductSelection, setStep } from "../store/slices/checkout-slice";
@@ -18,6 +20,8 @@ export function ProductPage() {
   const navigate = useNavigate();
   const dispatch = useAppDispatch();
   const { products, status, error, reload } = useProducts();
+
+  const [detailProductId, setDetailProductId] = useState<string | null>(null);
 
   const handleBuy = (product: Product, quantity: number) => {
     dispatch(productSelected(product));
@@ -56,10 +60,21 @@ export function ProductPage() {
       {status === "succeeded" && products.length > 0 && (
         <div className="grid grid-cols-[repeat(auto-fit,minmax(16rem,1fr))] gap-5">
           {products.map((product) => (
-            <ProductCard key={product.id} product={product} onBuy={handleBuy} />
+            <ProductCard
+              key={product.id}
+              product={product}
+              onBuy={handleBuy}
+              onViewDetail={(selected) => setDetailProductId(selected.id)}
+            />
           ))}
         </div>
       )}
+
+      <ProductDetailModal
+        productId={detailProductId}
+        onClose={() => setDetailProductId(null)}
+        onBuy={handleBuy}
+      />
     </section>
   );
 }

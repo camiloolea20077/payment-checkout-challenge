@@ -10,24 +10,31 @@ import { QuantitySelector } from './quantity-selector';
 interface ProductCardProps {
   product: Product;
   onBuy: (product: Product, quantity: number) => void;
+  onViewDetail: (product: Product) => void;
 }
 
 /**
  * Tarjeta de producto: imagen, nombre, descripción, precio, stock, selector de
  * cantidad y acción de compra. Deshabilita la compra si no hay stock.
  */
-export function ProductCard({ product, onBuy }: ProductCardProps) {
+export function ProductCard({
+  product,
+  onBuy,
+  onViewDetail,
+}: ProductCardProps) {
   const [quantity, setQuantity] = useState(MIN_QUANTITY);
   const isOutOfStock = product.availableUnits <= 0;
 
   return (
     <Card className="flex flex-col overflow-hidden transition duration-200 hover:-translate-y-0.5 hover:shadow-md">
-      <div className="aspect-[3/2] w-full overflow-hidden bg-slate-100">
+      {/* `object-contain` muestra la imagen completa: con `cover` se recortaba
+          y ampliaba cuando su proporción no coincidía con la del marco. */}
+      <div className="aspect-[3/2] w-full overflow-hidden bg-slate-100 p-3">
         <img
           src={product.imageUrl}
           alt={product.name}
           loading="lazy"
-          className="h-full w-full object-cover"
+          className="h-full w-full object-contain"
         />
       </div>
 
@@ -63,6 +70,13 @@ export function ProductCard({ product, onBuy }: ProductCardProps) {
             onClick={() => onBuy(product, quantity)}
           >
             {isOutOfStock ? 'Sin stock' : 'Pagar con tarjeta'}
+          </Button>
+          <Button
+            fullWidth
+            variant="secondary"
+            onClick={() => onViewDetail(product)}
+          >
+            Ver detalle
           </Button>
         </div>
       </div>
